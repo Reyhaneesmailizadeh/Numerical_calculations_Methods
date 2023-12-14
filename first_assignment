@@ -1,0 +1,68 @@
+%we_want_to_make_a_matrix
+
+
+No_Row = 3;
+
+No_Column = 4;
+
+
+
+%First_Approach
+
+My_Matrice = zeros(No_Row,No_Column);
+
+
+
+My_Matrice(1,1) = 1;
+
+My_Matrice(1,2) = 2;
+
+My_Matrice(1,3) = 3;
+
+My_Matrice(1,4) = 4;
+
+My_Matrice(2,1) = 5;
+
+My_Matrice(2,2) = 6;
+
+My_Matrice(2,3) = 7;
+
+My_Matrice(2,4) = 8;
+
+My_Matrice(3,1) = 9;
+
+My_Matrice(3,2) = 10;
+
+My_Matrice(3,3) = 11;
+
+My_Matrice(3,4) = 12;
+
+disp('My Matrix,first approach:');
+
+disp(My_Matrice);
+
+
+
+%Second_Approach
+
+value = 1;
+
+MyMatrix = zeros(No_Row,No_Column);
+
+for i = 1:No_Row
+
+    for j = 1:No_Column
+
+        myMatrix(i, j) = value;
+
+        value = value + 1;
+
+    end
+
+end
+
+
+
+disp('My Matrix, second approach:');
+
+disp(myMatrix);
