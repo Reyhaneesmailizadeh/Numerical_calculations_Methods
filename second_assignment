@@ -1,0 +1,51 @@
+clear; clc; close all;
+T_c = 191; % Kelvin
+P_c = 4600; % kPa
+R = 0.518; % kJ/(kg K)
+V = 3;
+P = 65000; % kPa
+T = 233.15; % Convert to Kelvin
+a = (0.427 * R^2 * (T_c)^2.5) / P_c;
+b = (0.0866 * R * T_c) / P_c;
+F = @(v) P - (R * T) / (v - b) + (a / (T ^ 0.5 * v * (v + b)));
+G = @(v) (R * T) / (v - b) - (a / (T ^ 0.5 * v * (v + b)));
+% Bisection method
+max_error = 0.001;
+v_a = 0.002;
+v_b = 0.019;
+count = 0;
+v_x = (v_a + v_b) / 2;
+while abs((v_x - v_a) / v_x) > max_error
+count = count + 1;
+v_x = (v_a + v_b) / 2;
+if F(v_a) * F(v_x) < 0
+v_b = v_x;
+else
+v_a = v_x;
+end
+end
+v_solution = (v_a + v_b) / 2;
+disp(['The Number of Iterations by Bisection Method: ', num2str(count)]);
+disp(['Estimated Molar Volume by Bisection Method (V): ', num2str(v_solution)]);
+disp(['The Mass of Gas: ',num2str(V / v_solution)]);
+disp(['The Maximum Error: ',num2str(abs( (v_x - v_a) / v_x ))]);
+%FalsePositionMethod
+v_a = 0.002;
+v_b = 0.019;
+v_x = (v_a * F(v_b) - v_b * F(v_a)) / (F(v_b) - F(v_a));
+max_error2 = 1;
+count2 = 0;
+while abs(P - G(v_x)) > max_error2
+count2 = count2 + 1;
+v_x = (v_a * F(v_b) - v_b * F(v_a)) / (F(v_b) - F(v_a));
+if F(v_a) * F(v_x) < 0
+v_b = v_x;
+else
+v_a = v_x;
+end
+end
+v_solution2 = (v_a * F(v_b) - v_b * F(v_a)) / (F(v_b) - F(v_a));
+disp(['The Number of Iterations by False Position Method: ', num2str(count2)]);
+disp(['Estimated Molar Volume by False Position Method (V): ', num2str(v_solution2)]);
+disp(['The Mass of Gas: ',num2str(V / v_solution2)]);
+disp(['The Maximum Error: ',num2str(abs(P - G(v_x)))]);
