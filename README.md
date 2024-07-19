@@ -7,7 +7,8 @@
 
   <h1>Welcome to the Numerical Computations Repository</h1>
 
-  <p>This repository contains various numerical computation solutions implemented in MATLAB and Python.</p>
+  <p>This repository contains various numerical computation solutions implemented in MATLAB and Python.
+  For seeing the problems please download the NumericalCalculationReadme.pdf</p>
 
   <h2>Contents:</h2>
   <ul>
